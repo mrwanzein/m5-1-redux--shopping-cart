@@ -1,21 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
 
 import CartItem from './CartItem';
 import Button from './Button';
 
+import {getStoreItemArray} from '../reducers/';
+
+
 const Cart = () => {
+    const state = useSelector(state => {
+        return getStoreItemArray(state);
+    });
+
     return(
         <CartWrapper>
             <CartInfo>
                 <Header>
                     <span style={{fontSize: "2em", color: "white", fontWeight: "bold"}}>Your Cart</span>
-                    <span style={{color: "lightgray"}}>Num of items</span>
+                    <span style={{color: "lightgray"}}>{state.length ? `${state.length} Items` : 'Please select a sticker'}</span>
                 </Header>
                 <div>
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
+                    {
+                        state.map(sticker => {
+                            return <CartItem key={sticker.id} stickerName={sticker.title} stickerQuantity={sticker.quantity}/>
+                        })
+                    }
                 </div>
             
                 <Total>

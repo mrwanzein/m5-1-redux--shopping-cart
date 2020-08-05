@@ -3,15 +3,15 @@ import styled from 'styled-components';
 
 import UnstyledButton from './UnstyledButton';
 
-const CartItem = () => {
+const CartItem = ({stickerName, stickerQuantity}) => {
     return(
         <Wrapper>
             <Top>
-                <span style={{color: "white", fontSize: "1.7em"}}>Hello World</span>
+                <span style={{color: "white", fontSize: "1.7em"}}>{stickerName}</span>
                 <DeleteBtn>X</DeleteBtn>
             </Top>
             <Bottom>
-                <span style={{color: "lightgray", fontSize: "1.2em"}}>Quantity: </span><Quantity>1</Quantity>
+                <span style={{color: "lightgray", fontSize: "1.2em"}}>Quantity: </span><Quantity>{stickerQuantity}</Quantity>
             </Bottom>
         </Wrapper>
     )
