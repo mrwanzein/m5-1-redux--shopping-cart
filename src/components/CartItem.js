@@ -3,12 +3,17 @@ import styled from 'styled-components';
 
 import UnstyledButton from './UnstyledButton';
 
-const CartItem = ({stickerName, stickerQuantity}) => {
+import { useDispatch } from 'react-redux';
+import {deleteItem} from '../action';
+
+const CartItem = ({stickerName, stickerQuantity, id}) => {
+    const dispatch = useDispatch();
+    
     return(
         <Wrapper>
             <Top>
                 <span style={{color: "white", fontSize: "1.7em"}}>{stickerName}</span>
-                <DeleteBtn>X</DeleteBtn>
+                <DeleteBtn onClick={() => dispatch(deleteItem(id))}>X</DeleteBtn>
             </Top>
             <Bottom>
                 <span style={{color: "lightgray", fontSize: "1.2em"}}>Quantity: </span><Quantity>{stickerQuantity}</Quantity>

@@ -23,7 +23,7 @@ const Cart = () => {
                 <div>
                     {
                         state.map(sticker => {
-                            return <CartItem key={sticker.id} stickerName={sticker.title} stickerQuantity={sticker.quantity}/>
+                            return <CartItem key={sticker.id} stickerName={sticker.title} stickerQuantity={sticker.quantity} id={sticker.id}/>
                         })
                     }
                 </div>
@@ -45,6 +45,7 @@ const Cart = () => {
 const CartWrapper = styled.div`
     background-color: rgb(100, 46, 117);
     height: 100%;
+    overflow: auto;
 `;
 
 const CartInfo = styled.div`
