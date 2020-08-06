@@ -4,11 +4,19 @@ import styled from 'styled-components';
 import UnstyledButton from './UnstyledButton';
 
 import { useDispatch } from 'react-redux';
-import {deleteItem} from '../action';
+import {deleteItem, updateQuantity} from '../action';
 
 const CartItem = ({stickerName, stickerQuantity, id}) => {
     const dispatch = useDispatch();
     
+    const handleNumInput = (ev) => {
+        if(/^\d+$/.test(Number(ev.target.value))) {
+            dispatch(updateQuantity(id, Number(ev.target.value)));
+        } else {
+            return null;
+        }
+    }
+
     return(
         <Wrapper>
             <Top>
@@ -16,7 +24,8 @@ const CartItem = ({stickerName, stickerQuantity, id}) => {
                 <DeleteBtn onClick={() => dispatch(deleteItem(id))}>X</DeleteBtn>
             </Top>
             <Bottom>
-                <span style={{color: "lightgray", fontSize: "1.2em"}}>Quantity: </span><Quantity>{stickerQuantity}</Quantity>
+                <span style={{color: "lightgray", fontSize: "1.2em"}}>Quantity: </span>
+                <Quantity value={stickerQuantity} onChange={handleNumInput}/>
             </Bottom>
         </Wrapper>
     )
@@ -40,13 +49,14 @@ const Bottom = styled.div`
     background-color: rgb(76, 34, 89);
 `;
 
-const Quantity = styled.div`
+const Quantity = styled.input`
     display: inline-block;
     padding: 5px 10px;
     background-color: white;
     border: 2px solid lightgray;
     font-size: 1.2em;
     font-weight: bold;
+    width: 20%;
 `;
 
 const DeleteBtn = styled(UnstyledButton)`

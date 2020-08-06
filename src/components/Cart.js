@@ -11,7 +11,23 @@ import {getStoreItemArray} from '../reducers/';
 const Cart = () => {
     const state = useSelector(state => {
         return getStoreItemArray(state);
-    });
+});
+
+const getTotal = () => {
+    let arr = Object.values(state);
+    let total = 0;
+    
+    if(arr.length) {
+        arr.forEach(sticker => {
+            let sum = sticker.price * sticker.quantity;
+            total += sum;
+        })
+
+        return total / 100;
+    } else {
+        return total;
+    }
+}
 
     return(
         <CartWrapper>
@@ -30,7 +46,7 @@ const Cart = () => {
             
                 <Total>
                     <div>
-                        <span style={{fontSize: "1.6em", color: "white"}}>Total: $999</span>
+                        <span style={{fontSize: "1.6em", color: "white"}}>Total: ${getTotal()}</span>
                     </div>
                     
                     <div>
